@@ -1,4 +1,4 @@
-package com.fdmgroup.Model;
+package com.fdmgroup.Model.User;
 
 import java.util.UUID;
 
@@ -10,6 +10,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,24 +23,32 @@ import lombok.NoArgsConstructor;
 @DiscriminatorColumn(name = "FDM_ROLE")
 @Data
 @NoArgsConstructor
-public abstract class User {
+@AllArgsConstructor
+@Builder
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
-	@Column(nullable = false, unique = true)
+	@Column(unique = true)
+	@Size(min = 9)
+	@Email
+	@NotNull
 	private String email;
 	
-	@Column(nullable = false)
+	@Size(min = 5)
+	@NotNull
 	private String password;
 	
-	@Column(nullable = false)
+	@NotNull
 	private String firstName;
 	
-	@Column(nullable = false)
+	@NotNull
 	private String lastName;
 	
-	@Column(nullable = false)
+	@NotNull
 	private int salary;
-
+	
+	//@ColumnDefault("false")
+	private boolean hasPersonallySetPassword = false;
 }

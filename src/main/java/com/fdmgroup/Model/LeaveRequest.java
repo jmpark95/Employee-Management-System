@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import com.fdmgroup.Enum.Status;
+import com.fdmgroup.Model.User.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

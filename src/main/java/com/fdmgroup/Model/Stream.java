@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fdmgroup.Enum.StreamName;
+import com.fdmgroup.Model.User.Trainee;
+import com.fdmgroup.Model.User.Trainer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
