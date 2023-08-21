@@ -1,6 +1,7 @@
-package com.fdmgroup.Model.User;
+package com.fdmgroup.Model.Employee;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -13,8 +14,6 @@ import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,12 +22,10 @@ import lombok.NoArgsConstructor;
 @DiscriminatorColumn(name = "FDM_ROLE")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class User {
+public abstract class Employee {
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
 	
 	@Column(unique = true)
 	@Size(min = 9)
@@ -38,6 +35,7 @@ public class User {
 	
 	@Size(min = 5)
 	@NotNull
+    @JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@NotNull
@@ -51,4 +49,5 @@ public class User {
 	
 	//@ColumnDefault("false")
 	private boolean hasPersonallySetPassword = false;
+	
 }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import com.fdmgroup.Enum.Status;
-import com.fdmgroup.Model.User.User;
+import com.fdmgroup.Model.Employee.Employee;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,12 +22,12 @@ import lombok.NoArgsConstructor;
 @Entity
 public class LeaveRequest {
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_USER_ID")
-	private User sender;
+	private Employee sender;
 	
 	private Timestamp startDate;
 	

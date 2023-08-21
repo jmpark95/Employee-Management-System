@@ -1,6 +1,4 @@
-package com.fdmgroup.Model.User;
-
-import com.fdmgroup.Model.Stream;
+package com.fdmgroup.Model.Employee;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -12,6 +10,6 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue("AccountManager")
 @Data
 @NoArgsConstructor
-public class AccountManager extends User {
+public class AccountManager extends Employee {
 
 }

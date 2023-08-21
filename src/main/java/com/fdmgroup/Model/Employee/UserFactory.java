@@ -1,10 +1,10 @@
-package com.fdmgroup.Model.User;
+package com.fdmgroup.Model.Employee;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserFactory {
-	public User createUser(String role) {
+	public Employee createUser(String role) {
 		if (role.equals("Trainee")) {
 			return new Trainee();
 		} else if (role.equals("Trainer")) {

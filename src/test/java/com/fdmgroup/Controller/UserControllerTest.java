@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fdmgroup.Config.WebSecurityConfig;
 import com.fdmgroup.DTO.CreateUserDTO;
-import com.fdmgroup.Model.User.User;
+import com.fdmgroup.Model.Employee.User;
 import com.fdmgroup.Repository.UserRoleRepository;
 import com.fdmgroup.Service.UserService;
 

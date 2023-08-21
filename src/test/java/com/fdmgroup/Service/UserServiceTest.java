@@ -17,9 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fdmgroup.DTO.CreateUserDTO;
-import com.fdmgroup.Model.User.Trainee;
-import com.fdmgroup.Model.User.User;
-import com.fdmgroup.Model.User.UserFactory;
+import com.fdmgroup.Model.Employee.Trainee;
+import com.fdmgroup.Model.Employee.User;
+import com.fdmgroup.Model.Employee.UserFactory;
 import com.fdmgroup.Repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)

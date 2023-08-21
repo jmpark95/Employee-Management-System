@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LeaveRequestDTO {
-	private UUID id;
+	private int id;
 	private PublicUserDTO sender;
 	private Timestamp startDate;
 	private Timestamp endDate;
