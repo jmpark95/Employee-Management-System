@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +49,7 @@ public class EClassController {
 	
 	//Create a class. DONE
 	// Get all classes for a particular stream. (Get all java classes) //DONE
+	//Get a single class
 
 	@GetMapping("/classes")
 	public ResponseEntity<List<EClass>> getAllClasses() {
@@ -66,14 +69,15 @@ public class EClassController {
 				.startDate(createClassDTO.getStartDate())
 				.endDate(createClassDTO.getEndDate())
 				.trainers(trainers)
+				.trainees(trainees)
 				.build();
 		
-		for (Trainee trainee : trainees) {
-			trainee.setEclass(eClass);
-		}
+//		for (Trainee trainee : trainees) {
+//			trainee.setEclass(eClass);
+//		}
 		
 		eClassRepository.save(eClass);
-		traineeRepository.saveAll(trainees);
+		//traineeRepository.saveAll(trainees);
 	}
 	
 	@GetMapping("/classes-by-stream")
@@ -84,6 +88,19 @@ public class EClassController {
 		return ResponseEntity.status(HttpStatus.OK).body(allClasses);
 	}
 	
+	@GetMapping("/{classId}")
+	public ResponseEntity<EClass> getClass(@PathVariable int classId){
+		EClass eClass = eClassRepository.findById(classId).get();;
+		
+		return ResponseEntity.status(HttpStatus.OK).body(eClass);
+	}
+	
+	@PutMapping("/{classId}")
+	public ResponseEntity<EClass> updateClass(@PathVariable int classId, @RequestBody CreateClassDTO createClassDTO){
+		EClass savedClass = eClassService.updateClass(classId, createClassDTO);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(savedClass);
+	}
 	
 	
 	

@@ -60,10 +60,19 @@ public class EmployeeController {
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
 	}
 	
-	//Get all trainees in a specific stream
+	//Get all trainees(in a specific stream) that are NOT currently registered to a class 
 	@GetMapping("/trainees-by-stream")
+	public ResponseEntity<List<Trainee>> getAllTraineesWithoutClassByStreamId(@RequestParam("streamId") int streamId) {
+		List<Trainee> allTrainees = traineeService.getAllTraineesWithoutClassByStreamId(streamId);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
+
+	}
+	
+	//Get all trainees(in a specific stream) regardless of class  
+	@GetMapping("/all-trainees-by-stream")
 	public ResponseEntity<List<Trainee>> getAllTraineesByStreamId(@RequestParam("streamId") int streamId) {
-		List<Trainee> allTrainees = traineeService.getAllTraineesByStreamId(streamId);
+		List<Trainee> allTrainees = traineeRepository.findAllByStreamId(streamId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
 

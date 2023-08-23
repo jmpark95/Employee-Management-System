@@ -54,7 +54,8 @@ public class EClass {
     @JsonManagedReference
 	private List<Trainer> trainers = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "eclass", fetch = FetchType.EAGER)
+	@OneToMany //(mappedBy = "eclass", fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_CLASS")
     @JsonManagedReference
 	private List<Trainee> trainees = new ArrayList<>();
 	
@@ -63,10 +64,10 @@ public class EClass {
 	
 	
 	
-	public void addTrainee(Trainee trainee) {
-			this.trainees.add(trainee);
-			trainee.setEclass(this);
-		
-	}
+//	public void addTrainee(Trainee trainee) {
+//			this.trainees.add(trainee);
+//			trainee.setEclass(this);
+//	}
+	
 }
 

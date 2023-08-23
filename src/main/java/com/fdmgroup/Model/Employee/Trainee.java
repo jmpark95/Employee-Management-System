@@ -8,12 +8,14 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @DiscriminatorValue("Trainee")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Trainee extends Employee {
 	@ManyToOne
@@ -25,5 +27,4 @@ public class Trainee extends Employee {
 	@JoinColumn(name="FK_CLASS")
     @JsonBackReference
 	private EClass eclass;
-
 }

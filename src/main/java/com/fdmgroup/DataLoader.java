@@ -43,14 +43,16 @@ public class DataLoader implements ApplicationRunner {
 		saveEmployees();
 		saveClasses();
 		
-//		Trainee trainee = traineeRepository.findById(1).get();
-//		EClass eClass = eClassRepository.findById(1).get();
-//		
-//		trainee.setEclass(eClass);
-//		//eClass.addTrainee(trainee);
-//		
-//		traineeRepository.save(trainee);
-//
+		Trainee trainee = traineeRepository.findById(1).get();
+		Trainee trainee5 = traineeRepository.findById(5).get();
+		EClass eClass = eClassRepository.findById(1).get();
+		
+		trainee.setEclass(eClass);
+		trainee5.setEclass(eClass);
+		
+		traineeRepository.save(trainee);
+		traineeRepository.save(trainee5);
+
 ////		saveLeaveRequests();
 	}
 
@@ -105,6 +107,15 @@ public class DataLoader implements ApplicationRunner {
 		trainee4.setSalary(60000);
 		trainee4.setHasPersonallySetPassword(false);
 		trainee4.setStream(streamRepository.findById(4).get());
+		
+		Trainee trainee5 = new Trainee();
+		trainee5.setEmail("min5@fdm.com");
+		trainee5.setPassword("password");
+		trainee5.setFirstName("Min5");
+		trainee5.setLastName("Park5");
+		trainee5.setSalary(60000);
+		trainee5.setHasPersonallySetPassword(false);
+		trainee5.setStream(streamRepository.findById(1).get());
 
 		
 		Trainer trainer1 = new Trainer();
@@ -127,6 +138,7 @@ public class DataLoader implements ApplicationRunner {
 		traineeRepository.save(trainee2);
 		traineeRepository.save(trainee3);
 		traineeRepository.save(trainee4);
+		traineeRepository.save(trainee5);
 		trainerRepository.save(trainer1);	
 		trainerRepository.save(trainer2);
 	}
