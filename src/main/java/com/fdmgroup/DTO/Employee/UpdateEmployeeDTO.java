@@ -1,4 +1,6 @@
-package com.fdmgroup.DTO;
+package com.fdmgroup.DTO.Employee;
+
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
@@ -13,7 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateUserDTO {
+public class UpdateEmployeeDTO {
+	@Column(unique = true)
+	@NotNull
+	private int id;
+	
 	@Column(unique = true)
 	@Size(min = 9)
 	@Email
@@ -25,11 +31,12 @@ public class CreateUserDTO {
 	
 	@NotNull
 	private String lastName;
-	
-	@NotNull
-	private String role;
+
 	
 	@NotNull
 	private int salary;
+	
+	@NotNull
+	private Date startDate;
 }
 

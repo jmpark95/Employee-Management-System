@@ -2,17 +2,65 @@ package com.fdmgroup.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.fdmgroup.DTO.CreateUserDTO;
-import com.fdmgroup.Model.Employee.UserFactory;
+import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
+import com.fdmgroup.Model.Employee.Employee;
+import com.fdmgroup.Model.Employee.Trainee;
+import com.fdmgroup.Repository.EmployeeRepository;
+import com.fdmgroup.Repository.FDMRoleRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class EmployeeService {
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
+	private final EmployeeRepository employeeRepository;
+	private final FDMRoleRepository fdmRoleRepository;
+
+	public EmployeeService(EmployeeRepository employeeRepository, FDMRoleRepository fdmRoleRepository) {
+		super();
+		this.employeeRepository = employeeRepository;
+		this.fdmRoleRepository = fdmRoleRepository;
+	}
+
+	public Employee updateEmployee(@Valid UpdateEmployeeDTO updateEmployeeDTO) {
+		Employee employee = employeeRepository.findById(updateEmployeeDTO.getId()).get();
+		
+		employee.setEmail(updateEmployeeDTO.getEmail());
+		employee.setFirstName(updateEmployeeDTO.getFirstName());
+		employee.setLastName(updateEmployeeDTO.getLastName());
+		employee.setSalary(updateEmployeeDTO.getSalary());
+		employee.setStartDate(updateEmployeeDTO.getStartDate());	
+		
+		return employeeRepository.save(employee);
+	}
+
+
 	
 	
+	
+
+//	public Employee updateEmployee(UpdateEmployeeDTO updateEmployeeDTO) {
+//		Employee employee = employeeRepository.findById(updateEmployeeDTO.getId()).get();
+//		
+//		
+//		//Factory
+//		//Employee employee = EmployeeFactory.createEmployee(updateEmployeeDTO.getRole());
+//		
+//		employee.setEmail(updateEmployeeDTO.getEmail());
+//		employee.setFirstName(updateEmployeeDTO.getFirstName());
+//		employee.setLastName(updateEmployeeDTO.getLastName());
+//		employee.setSalary(updateEmployeeDTO.getSalary());
+//		employee.setStartDate(updateEmployeeDTO.getStartDate());
+//		if (employee instanceof Trainee) {
+//			employee.setRole(fdmRoleRepository.findByRole(updateEmployeeDTO.getRole()));
+//		}
+//		
+//		return employee;
+//	}
+
+
 	
 	
 //	private final UserRepository userRepository;

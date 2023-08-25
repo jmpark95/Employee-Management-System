@@ -1,5 +1,7 @@
 package com.fdmgroup.Model.Employee;
 
+import java.sql.Date;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -43,6 +45,9 @@ public abstract class Employee {
 	
 	@NotNull
 	private String lastName;
+	
+	@NotNull
+	private Date startDate;
 	
 	@NotNull
 	private int salary;

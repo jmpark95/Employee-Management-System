@@ -6,19 +6,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
+import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
+import com.fdmgroup.Model.FDMRole;
+import com.fdmgroup.Model.Employee.AccountManager;
 import com.fdmgroup.Model.Employee.Employee;
+import com.fdmgroup.Model.Employee.HR;
 import com.fdmgroup.Model.Employee.Trainee;
 import com.fdmgroup.Model.Employee.Trainer;
-import com.fdmgroup.Model.Stream.EClass;
 import com.fdmgroup.Repository.EmployeeRepository;
+import com.fdmgroup.Repository.FDMRoleRepository;
 import com.fdmgroup.Repository.TraineeRepository;
 import com.fdmgroup.Repository.TrainerRepository;
+import com.fdmgroup.Service.AccountManagerService;
+import com.fdmgroup.Service.EmployeeService;
+import com.fdmgroup.Service.HRService;
 import com.fdmgroup.Service.TraineeService;
+import com.fdmgroup.Service.TrainerService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -27,16 +43,27 @@ public class EmployeeController {
 	private final EmployeeRepository employeeRepository;
 	private final TrainerRepository trainerRepository;
 	private final TraineeRepository traineeRepository;
+	private final TrainerService trainerService;
 	private final TraineeService traineeService;
-
+	private final AccountManagerService accountManagerService;
+	private final HRService hrService;
+	private final EmployeeService employeeService;
+	private final FDMRoleRepository fdmRoleRepository;
 
 	public EmployeeController(EmployeeRepository employeeRepository, TrainerRepository trainerRepository,
-			TraineeRepository traineeRepository, TraineeService traineeService) {
+			TraineeRepository traineeRepository, TrainerService trainerService, TraineeService traineeService,
+			AccountManagerService accountManagerService, HRService hrService, EmployeeService employeeService,
+			FDMRoleRepository fdmRoleRepository) {
 		super();
 		this.employeeRepository = employeeRepository;
 		this.trainerRepository = trainerRepository;
 		this.traineeRepository = traineeRepository;
+		this.trainerService = trainerService;
 		this.traineeService = traineeService;
+		this.accountManagerService = accountManagerService;
+		this.hrService = hrService;
+		this.employeeService = employeeService;
+		this.fdmRoleRepository = fdmRoleRepository;
 	}
 
 	@GetMapping("/employees")
@@ -75,7 +102,55 @@ public class EmployeeController {
 		List<Trainee> allTrainees = traineeRepository.findAllByStreamId(streamId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
+	}
+	
+	@GetMapping("/roles")
+	public ResponseEntity<List<FDMRole>> getAllRoles(){
+		List<FDMRole> allRoles = fdmRoleRepository.findAll();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(allRoles);
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid UpdateEmployeeDTO updateEmployeeDTO) {
+		Employee updatedEmployee = employeeService.updateEmployee(updateEmployeeDTO);
 
+		return ResponseEntity.status(HttpStatus.OK).body(updatedEmployee);
+	}
+	
+	@DeleteMapping("/{employeeId}/{role}")
+	public ResponseEntity deleteEmployee(@PathVariable int employeeId, @PathVariable String role) {
+		if (role.equals("Trainee")) {
+			traineeRepository.deleteById(employeeId);
+		} else if (role.equals("Trainer")) {
+			trainerService.deleteEmployee(employeeId);
+		} else if (role.equals("Account Manager")) {
+			accountManagerService.deleteEmployee(employeeId);
+		} else {
+			hrService.deleteEmployee(employeeId);
+		}
+
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+	
+	@PostMapping("/employee")
+	public ResponseEntity<Employee> createEmployee(@RequestBody @Valid CreateEmployeeDTO createEmployeeDTO) {
+		if (createEmployeeDTO.getRole().equals("Trainee")) {
+			Trainee newTrainee = traineeService.createTrainee(createEmployeeDTO);			
+			return ResponseEntity.status(HttpStatus.CREATED).body(newTrainee);
+		} 
+		else if (createEmployeeDTO.getRole().equals("Trainer")) {
+			Trainer newTrainer = trainerService.createTrainer(createEmployeeDTO);			
+			return ResponseEntity.status(HttpStatus.CREATED).body(newTrainer);
+		} 
+		else if (createEmployeeDTO.getRole().equals("Account Manager")) {
+			AccountManager newAccountManager = accountManagerService.createAccountManager(createEmployeeDTO);			
+			return ResponseEntity.status(HttpStatus.CREATED).body(newAccountManager);
+		} 
+		else {
+			HR newHR = hrService.createHR(createEmployeeDTO);		
+			return ResponseEntity.status(HttpStatus.CREATED).body(newHR);
+		}
 	}
 	
 	

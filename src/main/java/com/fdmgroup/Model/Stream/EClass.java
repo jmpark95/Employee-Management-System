@@ -24,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -52,6 +53,7 @@ public class EClass {
             joinColumns = @JoinColumn(name = "class_id"),
             inverseJoinColumns = @JoinColumn(name = "trainer_id"))
     @JsonManagedReference
+    @ToString.Exclude
 	private List<Trainer> trainers = new ArrayList<>();
 	
 	@OneToMany //(mappedBy = "eclass", fetch = FetchType.EAGER)
@@ -60,6 +62,9 @@ public class EClass {
 	private List<Trainee> trainees = new ArrayList<>();
 	
 
+	public void removeTrainer(Trainer trainer) {
+		this.trainers.remove(trainer);
+	}
 	
 	
 	

@@ -3,8 +3,8 @@ package com.fdmgroup.Model.Employee;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserFactory {
-	public Employee createUser(String role) {
+public class EmployeeFactory {
+	public static Employee createEmployee(String role) {
 		if (role.equals("Trainee")) {
 			return new Trainee();
 		} else if (role.equals("Trainer")) {

@@ -3,8 +3,6 @@ package com.fdmgroup.DTO.Leave;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import com.fdmgroup.DTO.PublicUserDTO;
-import com.fdmgroup.DTO.PublicUserDTO.PublicUserDTOBuilder;
 import com.fdmgroup.Enum.Status;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LeaveRequestDTO {
 	private int id;
-	private PublicUserDTO sender;
+	//private PublicUserDTO sender;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private Status status;
