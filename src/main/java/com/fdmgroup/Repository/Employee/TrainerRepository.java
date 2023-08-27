@@ -1,4 +1,4 @@
-package com.fdmgroup.Repository;
+package com.fdmgroup.Repository.Employee;
 
 import java.util.UUID;
 

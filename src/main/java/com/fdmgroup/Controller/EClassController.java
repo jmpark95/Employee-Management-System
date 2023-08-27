@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,8 @@ import com.fdmgroup.Model.Stream.EClass;
 import com.fdmgroup.Model.Stream.Stream;
 import com.fdmgroup.Repository.EClassRepository;
 import com.fdmgroup.Repository.StreamRepository;
-import com.fdmgroup.Repository.TraineeRepository;
-import com.fdmgroup.Repository.TrainerRepository;
+import com.fdmgroup.Repository.Employee.TraineeRepository;
+import com.fdmgroup.Repository.Employee.TrainerRepository;
 import com.fdmgroup.Service.EClassService;
 
 @RestController
@@ -47,10 +48,7 @@ public class EClassController {
 		this.traineeRepository = traineeRepository;
 	}
 	
-	//Create a class. DONE
-	// Get all classes for a particular stream. (Get all java classes) //DONE
-	//Get a single class
-
+	
 	@GetMapping("/classes")
 	public ResponseEntity<List<EClass>> getAllClasses() {
 		List<EClass> allClasses = eClassRepository.findAll();

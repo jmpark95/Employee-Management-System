@@ -24,10 +24,10 @@ import com.fdmgroup.Model.Employee.Employee;
 import com.fdmgroup.Model.Employee.HR;
 import com.fdmgroup.Model.Employee.Trainee;
 import com.fdmgroup.Model.Employee.Trainer;
-import com.fdmgroup.Repository.EmployeeRepository;
 import com.fdmgroup.Repository.FDMRoleRepository;
-import com.fdmgroup.Repository.TraineeRepository;
-import com.fdmgroup.Repository.TrainerRepository;
+import com.fdmgroup.Repository.Employee.EmployeeRepository;
+import com.fdmgroup.Repository.Employee.TraineeRepository;
+import com.fdmgroup.Repository.Employee.TrainerRepository;
 import com.fdmgroup.Service.AccountManagerService;
 import com.fdmgroup.Service.EmployeeService;
 import com.fdmgroup.Service.HRService;
@@ -64,6 +64,13 @@ public class EmployeeController {
 		this.hrService = hrService;
 		this.employeeService = employeeService;
 		this.fdmRoleRepository = fdmRoleRepository;
+	}
+	
+	@GetMapping("{employeeId}")
+	public ResponseEntity<Employee> getEmployee(@PathVariable int employeeId) {
+		Employee employee = employeeRepository.findById(employeeId).get();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(employee); 
 	}
 
 	@GetMapping("/employees")

@@ -1,5 +1,11 @@
 package com.fdmgroup.Model.Employee;
 
+import java.util.Collection;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fdmgroup.Model.FDMRole;
 import com.fdmgroup.Model.Stream.EClass;
@@ -18,7 +24,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("Trainee")
 @Data
 @NoArgsConstructor
-public class Trainee extends Employee {
+public class Trainee extends Employee{
 	@ManyToOne
 	@JoinColumn(name = "FK_STREAM")
     @JsonBackReference
@@ -32,4 +38,5 @@ public class Trainee extends Employee {
 	@ManyToOne
 	@JoinColumn(name = "FK_ROLE")
 	private FDMRole role;
+
 }

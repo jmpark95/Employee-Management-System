@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.fdmgroup.Model.FDMRole;
@@ -16,8 +17,8 @@ import com.fdmgroup.Model.Stream.Stream;
 import com.fdmgroup.Repository.EClassRepository;
 import com.fdmgroup.Repository.FDMRoleRepository;
 import com.fdmgroup.Repository.StreamRepository;
-import com.fdmgroup.Repository.TraineeRepository;
-import com.fdmgroup.Repository.TrainerRepository;
+import com.fdmgroup.Repository.Employee.TraineeRepository;
+import com.fdmgroup.Repository.Employee.TrainerRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,15 +31,21 @@ public class DataLoader implements ApplicationRunner {
 	private final EClassRepository eClassRepository;
 	private final TrainerRepository trainerRepository;
 	private final TraineeRepository traineeRepository;
+	private final PasswordEncoder passwordEncoder;	
 	
-	public DataLoader(FDMRoleRepository fdmRoleRepository, StreamRepository streamRepository, EClassRepository eClassRepository, TrainerRepository trainerRepository, TraineeRepository traineeRepository) {
+	public DataLoader(FDMRoleRepository fdmRoleRepository, StreamRepository streamRepository,
+			EClassRepository eClassRepository, TrainerRepository trainerRepository, TraineeRepository traineeRepository,
+			PasswordEncoder passwordEncoder) {
+		super();
 		this.fdmRoleRepository = fdmRoleRepository;
 		this.streamRepository = streamRepository;
 		this.eClassRepository = eClassRepository;
 		this.trainerRepository = trainerRepository;
 		this.traineeRepository = traineeRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
-	
+
+
 	@Data
 	@AllArgsConstructor
 	public class TraineeData {
@@ -111,7 +118,7 @@ public class DataLoader implements ApplicationRunner {
 		    Trainee trainee = new Trainee();
 		    
 		    trainee.setEmail(traineeData.getEmail());
-		    trainee.setPassword("password");
+		    trainee.setPassword(passwordEncoder.encode("password"));
 		    trainee.setFirstName(traineeData.getFirstName());
 		    trainee.setLastName(traineeData.getLastName());
 		    trainee.setSalary(traineeData.getSalary());
@@ -129,7 +136,7 @@ public class DataLoader implements ApplicationRunner {
 		    Trainer trainer = new Trainer();
 		    
 		    trainer.setEmail(trainerData.getEmail());
-		    trainer.setPassword("password");
+		    trainer.setPassword(passwordEncoder.encode("password"));
 		    trainer.setFirstName(trainerData.getFirstName());
 		    trainer.setLastName(trainerData.getLastName());
 		    trainer.setSalary(trainerData.getSalary());

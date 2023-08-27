@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fdmgroup.DTO.PublicUserDTO;
 import com.fdmgroup.DTO.Leave.LeaveRequestDTO;
 import com.fdmgroup.Model.LeaveRequest;
 import com.fdmgroup.Model.Employee.Employee;

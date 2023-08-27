@@ -1,4 +1,4 @@
-package com.fdmgroup.Repository;
+package com.fdmgroup.Repository.Employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -7,7 +7,7 @@ import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
 import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
 import com.fdmgroup.Model.Employee.HR;
 import com.fdmgroup.Repository.FDMRoleRepository;
-import com.fdmgroup.Repository.HRRepository;
+import com.fdmgroup.Repository.Employee.HRRepository;
 
 import jakarta.validation.Valid;
 

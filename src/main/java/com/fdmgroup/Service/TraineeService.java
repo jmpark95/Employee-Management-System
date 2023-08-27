@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
 import com.fdmgroup.Model.Employee.Trainee;
-import com.fdmgroup.Repository.EmployeeRepository;
 import com.fdmgroup.Repository.FDMRoleRepository;
-import com.fdmgroup.Repository.TraineeRepository;
+import com.fdmgroup.Repository.Employee.EmployeeRepository;
+import com.fdmgroup.Repository.Employee.TraineeRepository;
 
 @Service
 public class TraineeService {

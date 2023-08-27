@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
 import com.fdmgroup.Model.Employee.AccountManager;
-import com.fdmgroup.Repository.AccountManagerRepository;
+import com.fdmgroup.Repository.Employee.AccountManagerRepository;
 import com.fdmgroup.Repository.FDMRoleRepository;
 
 @Service

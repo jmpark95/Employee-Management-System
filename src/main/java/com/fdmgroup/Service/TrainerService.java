@@ -12,7 +12,7 @@ import com.fdmgroup.Model.Employee.Trainer;
 import com.fdmgroup.Model.Stream.EClass;
 import com.fdmgroup.Repository.EClassRepository;
 import com.fdmgroup.Repository.FDMRoleRepository;
-import com.fdmgroup.Repository.TrainerRepository;
+import com.fdmgroup.Repository.Employee.TrainerRepository;
 
 @Service
 public class TrainerService {

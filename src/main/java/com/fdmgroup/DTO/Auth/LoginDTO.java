@@ -1,4 +1,4 @@
-package com.fdmgroup.DTO;
+package com.fdmgroup.DTO.Auth;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

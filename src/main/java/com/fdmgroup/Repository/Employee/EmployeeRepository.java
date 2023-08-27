@@ -1,11 +1,12 @@
-package com.fdmgroup.Repository;
+package com.fdmgroup.Repository.Employee;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.fdmgroup.Model.Employee.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+	Optional<Employee> findByEmail(String email);
+	
 }
