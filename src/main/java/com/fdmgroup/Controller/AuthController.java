@@ -34,7 +34,7 @@ public class AuthController {
 	@PostMapping("/authenticate")
 	public AuthResponseDTO authenticateAndGenerateJWT(Authentication authentication) {
 		Instant now = Instant.now();
-		long expiry = 1800L; //30min
+		long expiry = 900L; //15min
 
 		String scope = authentication.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)

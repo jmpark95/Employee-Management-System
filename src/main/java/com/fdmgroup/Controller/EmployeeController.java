@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
 import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
+import com.fdmgroup.DTO.Employee.UpdatePasswordDTO;
 import com.fdmgroup.Model.FDMRole;
 import com.fdmgroup.Model.Employee.AccountManager;
 import com.fdmgroup.Model.Employee.Employee;
@@ -158,6 +160,16 @@ public class EmployeeController {
 			HR newHR = hrService.createHR(createEmployeeDTO);		
 			return ResponseEntity.status(HttpStatus.CREATED).body(newHR);
 		}
+	}
+	
+	@PatchMapping("/password")
+	public ResponseEntity updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+		try {
+	        Employee employee = employeeService.updatePassword(updatePasswordDTO);
+			return ResponseEntity.status(HttpStatus.OK).body(employee);
+	    } catch (IllegalArgumentException ex) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Old password doesn't match");
+	    }
 	}
 	
 	

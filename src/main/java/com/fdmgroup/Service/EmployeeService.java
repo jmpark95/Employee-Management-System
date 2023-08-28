@@ -2,14 +2,16 @@ package com.fdmgroup.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
+import com.fdmgroup.DTO.Employee.UpdatePasswordDTO;
 import com.fdmgroup.Model.Employee.Employee;
-import com.fdmgroup.Model.Employee.Trainee;
 import com.fdmgroup.Repository.FDMRoleRepository;
 import com.fdmgroup.Repository.Employee.EmployeeRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @Service
@@ -17,11 +19,14 @@ public class EmployeeService {
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 	private final EmployeeRepository employeeRepository;
 	private final FDMRoleRepository fdmRoleRepository;
+	private final PasswordEncoder passwordEncoder;
 
-	public EmployeeService(EmployeeRepository employeeRepository, FDMRoleRepository fdmRoleRepository) {
+	public EmployeeService(EmployeeRepository employeeRepository, FDMRoleRepository fdmRoleRepository,
+			PasswordEncoder passwordEncoder) {
 		super();
 		this.employeeRepository = employeeRepository;
 		this.fdmRoleRepository = fdmRoleRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public Employee updateEmployee(@Valid UpdateEmployeeDTO updateEmployeeDTO) {
@@ -33,6 +38,18 @@ public class EmployeeService {
 		employee.setSalary(updateEmployeeDTO.getSalary());
 		employee.setStartDate(updateEmployeeDTO.getStartDate());	
 		
+		return employeeRepository.save(employee);
+	}
+
+	public Employee updatePassword(UpdatePasswordDTO updatePasswordDTO) {
+		Employee employee = employeeRepository.findById(updatePasswordDTO.getEmployeeID()).get();
+		
+		if (!passwordEncoder.matches(updatePasswordDTO.getOldPassword(), employee.getPassword())) {
+			throw new EntityNotFoundException();
+		} 
+		
+		String newPassword = passwordEncoder.encode(updatePasswordDTO.getNewPassword());
+		employee.setPassword(newPassword);
 		return employeeRepository.save(employee);
 	}
 
