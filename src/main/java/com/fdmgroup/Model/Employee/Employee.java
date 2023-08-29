@@ -61,6 +61,7 @@ public abstract class Employee implements UserDetails  {
 	private boolean hasPersonallySetPassword = false;
 	
 	private float leaveTaken;
+
 	
 	
 	

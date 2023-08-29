@@ -45,6 +45,14 @@ public class DataLoader implements ApplicationRunner {
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	public void run(ApplicationArguments args) {
+		saveFDMRoles();
+		saveStreams();
+		saveEmployees();
+		saveClasses();
+//		saveLeaveRequests();
+	}
+	
 
 	@Data
 	@AllArgsConstructor
@@ -67,15 +75,7 @@ public class DataLoader implements ApplicationRunner {
 		private int salary;
 		private Date startDate;
 		private FDMRole role;
-	}
-
-
-	public void run(ApplicationArguments args) {
-		saveFDMRoles();
-		saveStreams();
-		saveEmployees();
-		saveClasses();
-//		saveLeaveRequests();
+		private float leaveTaken;
 	}
 
 	public void saveFDMRoles() {
@@ -107,9 +107,9 @@ public class DataLoader implements ApplicationRunner {
 				);
 		
 		List<TrainerData> trainerDataList = Arrays.asList(
-			    new TrainerData("don@fdm.com", "Don", "Witcombe", 70000, Date.valueOf("2020-08-01"), fdmRoleRepository.findByRole("Trainer")),
-			    new TrainerData("manisha@fdm.com", "Manisha", "Singh", 70000, Date.valueOf("2021-05-01"), fdmRoleRepository.findByRole("Trainer")),
-			    new TrainerData("iffty@fdm.com", "Iffty", "Ahmed", 70000, Date.valueOf("2019-08-21"), fdmRoleRepository.findByRole("Trainer"))
+			    new TrainerData("don@fdm.com", "Don", "Witcombe", 70000, Date.valueOf("2020-08-01"), fdmRoleRepository.findByRole("Trainer"), 10f),
+			    new TrainerData("manisha@fdm.com", "Manisha", "Singh", 70000, Date.valueOf("2021-05-01"), fdmRoleRepository.findByRole("Trainer"), 5f),
+			    new TrainerData("iffty@fdm.com", "Iffty", "Ahmed", 70000, Date.valueOf("2019-08-21"), fdmRoleRepository.findByRole("Trainer"), 20f)
 				);
 		
 		
@@ -143,6 +143,7 @@ public class DataLoader implements ApplicationRunner {
 		    trainer.setStartDate(trainerData.getStartDate());
 		    trainer.setHasPersonallySetPassword(false);
 		    trainer.setRole(trainerData.getRole());
+		    trainer.setLeaveTaken(trainerData.getLeaveTaken());;
 
 		    trainerRepository.save(trainer);
 		}			
@@ -155,7 +156,6 @@ public class DataLoader implements ApplicationRunner {
 		class1.setStartDate(Date.valueOf("2023-05-01"));
 		class1.setEndDate(Date.valueOf("2023-08-01"));
 		class1.setTrainers(trainerRepository.findAll());
-		//class1.addTrainees(traineeRepository.findAll());
 		
 		EClass class2 = new EClass();
 		class2.setStream(streamRepository.findByName("Cybersecurity"));
@@ -165,7 +165,6 @@ public class DataLoader implements ApplicationRunner {
 
 		eClassRepository.save(class1);
 	    eClassRepository.save(class2);
-		//traineeRepository.findAll().get(0).setEclass(class1);		
 	}
 
 

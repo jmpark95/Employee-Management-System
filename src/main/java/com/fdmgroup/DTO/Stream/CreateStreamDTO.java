@@ -1,4 +1,4 @@
-package com.fdmgroup.DTO;
+package com.fdmgroup.DTO.Stream;
 
 import java.sql.Date;
 import java.util.List;

@@ -1,35 +1,45 @@
 package com.fdmgroup.Controller;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fdmgroup.DTO.Leave.LeaveRequestDTO;
 import com.fdmgroup.Model.LeaveRequest;
-import com.fdmgroup.Model.Employee.Employee;
 import com.fdmgroup.Repository.LeaveRequestRepository;
+import com.fdmgroup.Service.LeaveRequestService;
 
 @RestController
 @RequestMapping("/api/leave")
 public class LeaveController {
 	private final LeaveRequestRepository leaveRequestRepository;
+	private final LeaveRequestService leaveRequestService;
 
-	public LeaveController(LeaveRequestRepository leaveRequestRepository) {
+	public LeaveController(LeaveRequestRepository leaveRequestRepository, LeaveRequestService leaveRequestService) {
+		super();
 		this.leaveRequestRepository = leaveRequestRepository;
+		this.leaveRequestService = leaveRequestService;
 	}
-	
+
 	@GetMapping("/leave-requests")
 	public ResponseEntity<List<LeaveRequest>> getAllLeaveRequests(){
 		List<LeaveRequest> allLeaveRequests = leaveRequestRepository.findAll();
 		
 		return ResponseEntity.status(HttpStatus.OK).body(allLeaveRequests);
-
+	}
+	
+	@PostMapping("/leave-request")
+	public ResponseEntity createLeaveRequest(@RequestBody LeaveRequestDTO leaveRequestDTO) {
+		LeaveRequest leaveRequest = leaveRequestService.createLeaveRequest(leaveRequestDTO);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(leaveRequest);
 	}
 	
 	

@@ -1,9 +1,7 @@
 package com.fdmgroup.DTO.Leave;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.UUID;
-
-import com.fdmgroup.Enum.Status;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LeaveRequestDTO {
-	private int id;
-	//private PublicUserDTO sender;
-	private Timestamp startDate;
-	private Timestamp endDate;
-	private Status status;
+	private int employeeID;
+	private Date startDate;
+	private Date endDate;
+	private float totalHours;
 }
 

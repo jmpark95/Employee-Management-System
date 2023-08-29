@@ -1,5 +1,7 @@
 package com.fdmgroup.Service;
 
+import javax.naming.AuthenticationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +13,6 @@ import com.fdmgroup.Model.Employee.Employee;
 import com.fdmgroup.Repository.FDMRoleRepository;
 import com.fdmgroup.Repository.Employee.EmployeeRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @Service
@@ -45,7 +46,7 @@ public class EmployeeService {
 		Employee employee = employeeRepository.findById(updatePasswordDTO.getEmployeeID()).get();
 		
 		if (!passwordEncoder.matches(updatePasswordDTO.getOldPassword(), employee.getPassword())) {
-			throw new EntityNotFoundException();
+			throw new IllegalArgumentException();
 		} 
 		
 		String newPassword = passwordEncoder.encode(updatePasswordDTO.getNewPassword());
