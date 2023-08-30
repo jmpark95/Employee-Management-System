@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fdmgroup.DTO.Employee.CreateEmployeeDTO;
+import com.fdmgroup.DTO.Employee.SetPasswordDTO;
 import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
 import com.fdmgroup.DTO.Employee.UpdatePasswordDTO;
 import com.fdmgroup.Model.FDMRole;
@@ -67,21 +68,21 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 		this.fdmRoleRepository = fdmRoleRepository;
 	}
-	
+
 	@GetMapping("{employeeId}")
 	public ResponseEntity<Employee> getEmployee(@PathVariable int employeeId) {
 		Employee employee = employeeRepository.findById(employeeId).get();
-		
-		return ResponseEntity.status(HttpStatus.OK).body(employee); 
+
+		return ResponseEntity.status(HttpStatus.OK).body(employee);
 	}
 
 	@GetMapping("/employees")
-	public ResponseEntity<List<Employee>> getAllEmployees(){
+	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> allEmployees = employeeRepository.findAll();
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(allEmployees);
 	}
-	
+
 	@GetMapping("/trainers")
 	public ResponseEntity<List<Trainer>> getAllTrainers() {
 		List<Trainer> allTrainers = trainerRepository.findAll();
@@ -95,38 +96,39 @@ public class EmployeeController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
 	}
-	
-	//Get all trainees(in a specific stream) that are NOT currently registered to a class 
+
+	// Get all trainees(in a specific stream) that are NOT currently registered to a
+	// class
 	@GetMapping("/trainees-by-stream")
 	public ResponseEntity<List<Trainee>> getAllTraineesWithoutClassByStreamId(@RequestParam("streamId") int streamId) {
 		List<Trainee> allTrainees = traineeService.getAllTraineesWithoutClassByStreamId(streamId);
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
 
 	}
-	
-	//Get all trainees(in a specific stream) regardless of class  
+
+	// Get all trainees(in a specific stream) regardless of class
 	@GetMapping("/all-trainees-by-stream")
 	public ResponseEntity<List<Trainee>> getAllTraineesByStreamId(@RequestParam("streamId") int streamId) {
 		List<Trainee> allTrainees = traineeRepository.findAllByStreamId(streamId);
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(allTrainees);
 	}
-	
+
 	@GetMapping("/roles")
-	public ResponseEntity<List<FDMRole>> getAllRoles(){
+	public ResponseEntity<List<FDMRole>> getAllRoles() {
 		List<FDMRole> allRoles = fdmRoleRepository.findAll();
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(allRoles);
 	}
-	
+
 	@PutMapping("/update")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid UpdateEmployeeDTO updateEmployeeDTO) {
 		Employee updatedEmployee = employeeService.updateEmployee(updateEmployeeDTO);
 
 		return ResponseEntity.status(HttpStatus.OK).body(updatedEmployee);
 	}
-	
+
 	@DeleteMapping("/{employeeId}/{role}")
 	public ResponseEntity deleteEmployee(@PathVariable int employeeId, @PathVariable String role) {
 		if (role.equals("Trainee")) {
@@ -141,46 +143,45 @@ public class EmployeeController {
 
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
-	
+
 	@PostMapping("/employee")
 	public ResponseEntity<Employee> createEmployee(@RequestBody @Valid CreateEmployeeDTO createEmployeeDTO) {
 		if (createEmployeeDTO.getRole().equals("Trainee")) {
-			Trainee newTrainee = traineeService.createTrainee(createEmployeeDTO);			
+			Trainee newTrainee = traineeService.createTrainee(createEmployeeDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(newTrainee);
-		} 
-		else if (createEmployeeDTO.getRole().equals("Trainer")) {
-			Trainer newTrainer = trainerService.createTrainer(createEmployeeDTO);			
+		} else if (createEmployeeDTO.getRole().equals("Trainer")) {
+			Trainer newTrainer = trainerService.createTrainer(createEmployeeDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(newTrainer);
-		} 
-		else if (createEmployeeDTO.getRole().equals("Account Manager")) {
-			AccountManager newAccountManager = accountManagerService.createAccountManager(createEmployeeDTO);			
+		} else if (createEmployeeDTO.getRole().equals("Account Manager")) {
+			AccountManager newAccountManager = accountManagerService.createAccountManager(createEmployeeDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(newAccountManager);
-		} 
-		else {
-			HR newHR = hrService.createHR(createEmployeeDTO);		
+		} else {
+			HR newHR = hrService.createHR(createEmployeeDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(newHR);
 		}
 	}
-	
+
 	@PatchMapping("/password")
 	public ResponseEntity updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
 		try {
-	        Employee employee = employeeService.updatePassword(updatePasswordDTO);
+			Employee employee = employeeService.updatePassword(updatePasswordDTO);
 			return ResponseEntity.status(HttpStatus.OK).body(employee);
-	    } catch (IllegalArgumentException ex) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Old password doesn't match");
-	    }
+		} catch (IllegalArgumentException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Old password doesn't match");
+		}
+	}
+
+	@PatchMapping("/set-password")
+	public ResponseEntity setPassword(@RequestBody SetPasswordDTO setPasswordDTO) {
+		Employee employee = employeeService.setPassword(setPasswordDTO);
+
+		return ResponseEntity.status(HttpStatus.OK).body(employee);
 	}
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
+
 //	private final UserService userService;
 //	private final UserRepository userRepository;
 //	private final UserRoleRepository userRoleRepository;
@@ -239,6 +240,5 @@ public class EmployeeController {
 //		return ResponseEntity.status(HttpStatus.OK).body(allRoles);
 //	}
 //
-
 
 }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fdmgroup.DTO.Employee.SetPasswordDTO;
 import com.fdmgroup.DTO.Employee.UpdateEmployeeDTO;
 import com.fdmgroup.DTO.Employee.UpdatePasswordDTO;
 import com.fdmgroup.Model.Employee.Employee;
@@ -32,32 +33,36 @@ public class EmployeeService {
 
 	public Employee updateEmployee(@Valid UpdateEmployeeDTO updateEmployeeDTO) {
 		Employee employee = employeeRepository.findById(updateEmployeeDTO.getId()).get();
-		
+
 		employee.setEmail(updateEmployeeDTO.getEmail());
 		employee.setFirstName(updateEmployeeDTO.getFirstName());
 		employee.setLastName(updateEmployeeDTO.getLastName());
 		employee.setSalary(updateEmployeeDTO.getSalary());
-		employee.setStartDate(updateEmployeeDTO.getStartDate());	
-		
+		employee.setStartDate(updateEmployeeDTO.getStartDate());
+
 		return employeeRepository.save(employee);
 	}
 
 	public Employee updatePassword(UpdatePasswordDTO updatePasswordDTO) {
 		Employee employee = employeeRepository.findById(updatePasswordDTO.getEmployeeID()).get();
-		
+
 		if (!passwordEncoder.matches(updatePasswordDTO.getOldPassword(), employee.getPassword())) {
 			throw new IllegalArgumentException();
-		} 
-		
+		}
+
 		String newPassword = passwordEncoder.encode(updatePasswordDTO.getNewPassword());
 		employee.setPassword(newPassword);
 		return employeeRepository.save(employee);
 	}
 
+	public Employee setPassword(SetPasswordDTO setPasswordDTO) {
+		Employee employee = employeeRepository.findById(setPasswordDTO.getEmployeeId()).get();
+		String newPassword = passwordEncoder.encode(setPasswordDTO.getPassword());
+		employee.setPassword(newPassword);
+		employee.setHasPersonallySetPassword(true);
 
-	
-	
-	
+		return employeeRepository.save(employee);
+	}
 
 //	public Employee updateEmployee(UpdateEmployeeDTO updateEmployeeDTO) {
 //		Employee employee = employeeRepository.findById(updateEmployeeDTO.getId()).get();
@@ -78,9 +83,6 @@ public class EmployeeService {
 //		return employee;
 //	}
 
-
-	
-	
 //	private final UserRepository userRepository;
 //    private final UserFactory userFactory;
 //    private final PasswordEncoder passwordEncoder;
@@ -140,5 +142,3 @@ public class EmployeeService {
 ////	    return sb.toString();
 ////	}
 }
-
-
