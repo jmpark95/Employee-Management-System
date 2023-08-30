@@ -10,4 +10,8 @@ import com.fdmgroup.Model.LeaveRequest;
 public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Integer> {
 	@Query("SELECT l from LeaveRequest l WHERE l.requester.id = :employeeId")
 	List<LeaveRequest> findAllByEmployeeId(int employeeId);
+
+	@Query("SELECT l from LeaveRequest l WHERE l.status = Pending")
+	List<LeaveRequest> findAllPendingLeaveRequests();
+
 }
