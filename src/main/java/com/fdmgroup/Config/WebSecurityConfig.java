@@ -85,7 +85,7 @@ public class WebSecurityConfig {
 		CorsConfiguration configuration = new CorsConfiguration();
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://minpark-ems.up.railway.app/"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://minpark-ems.up.railway.app"));
 		configuration.setAllowedMethods(Arrays.asList("*"));
 		configuration.setAllowedHeaders(Arrays.asList("*"));
 		configuration.setExposedHeaders(Arrays.asList("Authorization"));
