@@ -31,11 +31,10 @@ public class AuthController {
 		this.decoder = decoder;
 	}
 
-	@PostMapping("/authenticate")
+	@PostMapping("authenticate")
 	public AuthResponseDTO authenticateAndGenerateJWT(Authentication authentication) {
 		Instant now = Instant.now();
-		//long expiry = 3600L; //1hour
-		long expiry = 36000L;
+		long expiry = 3600L; //1hour
 
 		String scope = authentication.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
