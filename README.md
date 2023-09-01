@@ -1,11 +1,11 @@
 A small employee management system where HR can manage employee accounts, leave requests and streams. Cleaner code + entities than previous projects. Front end in Spring Employee Management System Frontend repo
 
 # To access the application:
-- Example HR employee with full admin rights
+Example HR employee with full admin rights
 - email: john.doe@fdm.com <br />
 password: password
 
-- Example regular employee with limited app functionality
+Example regular employee with limited app functionality
 - email: mia.jones@fdm.com <br />
 password: password
 

@@ -33,7 +33,7 @@ import lombok.ToString;
 @Builder
 public class EClass {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@ManyToOne
