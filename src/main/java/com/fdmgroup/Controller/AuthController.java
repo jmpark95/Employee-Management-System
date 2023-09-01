@@ -31,7 +31,7 @@ public class AuthController {
 		this.decoder = decoder;
 	}
 
-	@PostMapping("authenticate")
+	@PostMapping("/authenticate")
 	public AuthResponseDTO authenticateAndGenerateJWT(Authentication authentication) {
 		Instant now = Instant.now();
 		long expiry = 3600L; //1hour
