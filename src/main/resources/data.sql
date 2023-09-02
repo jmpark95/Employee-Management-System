@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+
+
+
 --
 -- Dumping data for table `stream`
 --
@@ -34,6 +38,11 @@ LOCK TABLES `stream_seq` WRITE;
 INSERT INTO `stream_seq` VALUES (101);
 /*!40000 ALTER TABLE `stream_seq` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+
+
 
 
 
@@ -69,6 +78,8 @@ UNLOCK TABLES;
 
 
 
+
+
 --
 -- Dumping data for table `employee`
 --
@@ -79,15 +90,6 @@ INSERT INTO `employee` (fk_class, fk_role, fk_stream, has_personally_set_passwor
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
-----
----- Dumping data for table `employee_seq`
-----
---
---LOCK TABLES `employee_seq` WRITE;
---/*!40000 ALTER TABLE `employee_seq` DISABLE KEYS */;
---INSERT INTO `employee_seq` VALUES (151);
---/*!40000 ALTER TABLE `employee_seq` ENABLE KEYS */;
---UNLOCK TABLES;
 
 
 
@@ -97,25 +99,9 @@ UNLOCK TABLES;
 
 
 
---
--- Dumping data for table `leave_request`
---
 
-LOCK TABLES `leave_request` WRITE;
-/*!40000 ALTER TABLE `leave_request` DISABLE KEYS */;
-INSERT INTO `leave_request` VALUES ('2023-09-01',86,1,'2023-08-28',38,'Pending'),('2023-09-07',1,2,'2023-09-04',30.4,'Pending'),('2023-09-14',3,3,'2023-09-11',25.3,'Pending'),('2023-09-27',2,4,'2023-09-25',22.8,'Pending'),('2023-09-01',69,5,'2023-08-28',38,'Pending'),('2023-09-01',47,6,'2023-08-28',38,'Pending');
-/*!40000 ALTER TABLE `leave_request` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Dumping data for table `leave_request_seq`
---
 
-LOCK TABLES `leave_request_seq` WRITE;
-/*!40000 ALTER TABLE `leave_request_seq` DISABLE KEYS */;
-INSERT INTO `leave_request_seq` VALUES (101);
-/*!40000 ALTER TABLE `leave_request_seq` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 
