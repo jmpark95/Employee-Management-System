@@ -1,13 +1,13 @@
-A small employee management system where HR can manage employee accounts, leave requests and streams. Cleaner code + entities than previous projects. Front end in Spring Employee Management System Frontend repo
+A small employee management system where HR can manage employees, leave requests and streams. Employees can also login to submit leave requests and view their profile. React front end in Empl Management frontend repo. Database pre-populated with dummy data, so if there leave taken hours but no history of leave, please ignore as this is not a bug.
 
 # To access the application:
 Example HR employee with full admin rights
 - email: john.doe@fdm.com <br />
-password: password
+password: john.doe.password
 
-Example regular employee with limited app functionality
+Example regular employee
 - email: mia.jones@fdm.com <br />
-password: password
+password: mia.jones.password
 
 ---
 
