@@ -79,15 +79,15 @@ INSERT INTO `employee` (fk_class, fk_role, fk_stream, has_personally_set_passwor
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
+----
+---- Dumping data for table `employee_seq`
+----
 --
--- Dumping data for table `employee_seq`
---
-
-LOCK TABLES `employee_seq` WRITE;
-/*!40000 ALTER TABLE `employee_seq` DISABLE KEYS */;
-INSERT INTO `employee_seq` VALUES (151);
-/*!40000 ALTER TABLE `employee_seq` ENABLE KEYS */;
-UNLOCK TABLES;
+--LOCK TABLES `employee_seq` WRITE;
+--/*!40000 ALTER TABLE `employee_seq` DISABLE KEYS */;
+--INSERT INTO `employee_seq` VALUES (151);
+--/*!40000 ALTER TABLE `employee_seq` ENABLE KEYS */;
+--UNLOCK TABLES;
 
 
 

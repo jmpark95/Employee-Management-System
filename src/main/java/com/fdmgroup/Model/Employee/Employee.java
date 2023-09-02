@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class Employee implements UserDetails  {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(unique = true)
