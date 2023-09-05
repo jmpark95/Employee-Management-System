@@ -1,3 +1,6 @@
+Edit 5/9
+-  Practicing MS Power Virtual Agent. Added simple chat that can answer queries - submitting leave, adding employee, submitting feedback on website.  Still a work in progress.
+
 A small employee management system where HR can manage employees, leave requests and streams. Employees can also login to submit leave requests and view their profile. React front end in Empl Management frontend repo. Database pre-populated with dummy data, so if there leave taken hours but no history of leave, please ignore as this is not a bug.
 
 # To access the application:
