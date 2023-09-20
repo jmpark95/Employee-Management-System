@@ -71,8 +71,7 @@ public class WebSecurityConfig {
 				.csrf((csrf) -> csrf.ignoringRequestMatchers("/authenticate"))
 				.httpBasic(Customizer.withDefaults())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//				.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
-				.cors(cors -> cors.disable())
+				.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.exceptionHandling((exceptions) -> exceptions
 						.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
