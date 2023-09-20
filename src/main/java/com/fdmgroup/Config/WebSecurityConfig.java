@@ -62,6 +62,8 @@ public class WebSecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
+		.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
+
 				.authorizeHttpRequests((authorize) -> authorize				
 					.requestMatchers("/authenticate").permitAll()
 					.requestMatchers("/api/**").authenticated()
@@ -71,7 +73,6 @@ public class WebSecurityConfig {
 				.httpBasic(Customizer.withDefaults())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
 				.exceptionHandling((exceptions) -> exceptions
 						.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
 						.accessDeniedHandler(new BearerTokenAccessDeniedHandler())
