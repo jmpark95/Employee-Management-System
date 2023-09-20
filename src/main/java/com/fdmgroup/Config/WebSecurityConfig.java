@@ -85,7 +85,7 @@ public class WebSecurityConfig {
 		CorsConfiguration configuration = new CorsConfiguration();
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://minpark-ems.netlify.app", "https://red-bush-017446800.3.azurestaticapps.net"));
+		configuration.setAllowedOrigins(Arrays.asList("https://red-bush-017446800.3.azurestaticapps.net", "http://localhost:5173", "https://minpark-ems.netlify.app"));
 		configuration.setAllowedMethods(Arrays.asList("*"));
 		configuration.setAllowedHeaders(Arrays.asList("*"));
 		configuration.setExposedHeaders(Arrays.asList("Authorization"));
