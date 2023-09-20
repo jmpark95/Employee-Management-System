@@ -62,7 +62,6 @@ public class WebSecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-		.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
 
 				.authorizeHttpRequests((authorize) -> authorize				
 					.requestMatchers("/authenticate").permitAll()
@@ -72,6 +71,7 @@ public class WebSecurityConfig {
 				.csrf((csrf) -> csrf.ignoringRequestMatchers("/authenticate"))
 				.httpBasic(Customizer.withDefaults())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+				.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
 				.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.exceptionHandling((exceptions) -> exceptions
 						.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
